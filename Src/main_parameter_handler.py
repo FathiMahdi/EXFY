@@ -1,0 +1,70 @@
+import sys
+from exiftool_handler import *
+from yara_handler import *
+
+# -h --help help and banner
+# -a -all exiftool + yara + all csv
+# -e --exiftool exiftool only
+# -y --yara  yara only
+# if only application name make -h
+
+
+# PEY -e 3439yeqhr.png --csv kabgfkjbaf.csv
+
+def parseMainParameter(parameter,arg_counter):
+
+    if arg_counter > 1:
+
+        # for help
+        if parameter[1] == '--help' or parameter[1] == '-h':
+
+            print('Help')
+            return True
+        
+        # chek if exiftool is required
+        elif parameter[1] == '--exiftool' or parameter[1]== '-e':
+            
+            # check if csv extraction required
+            if (arg_counter>=4) and ((parameter[3] == '--csv') or (parameter[3] == '-c')):
+
+                exifConvertToCsv(parameter[2],parameter[4])
+
+            # others just extract the metadata ond show them in terminal
+            elif (arg_counter>=3):
+                exifExtractAll(parameter[2])
+
+        # chek if yara is required
+        elif parameter[1] == '--yara' or parameter[1]== '-y': 
+
+            # check if csv extraction required
+            if (arg_counter>=4) and ((parameter[3] == '--csv') or (parameter[3] == '-c')):
+
+                yaraConvertToCsv(parameter[2],parameter[4])
+
+            # others just extract the metadata ond show them in terminal
+            elif (arg_counter>=3):
+                yaraRunRule(parameter[2])    
+
+
+        # chek if all is required
+        # elif parameter[1] == '--all' or parameter[1]== '-a':
+
+        #     # check if csv extraction required
+        #     if (arg_counter>=4) and ((parameter[3] == '--csv') or (parameter[3] == '-c')):
+
+        #         exifConvertToCsv(parameter[2],parameter[4])
+
+        #     # others just extract the metadata ond show them in terminal
+        #     elif (arg_counter>=3):
+        #         exifExtraclAll(parameter[2])
+
+        # no command found
+        else:
+        
+            return False
+        
+    else :
+
+        # TODO: print help
+        return True
+    
