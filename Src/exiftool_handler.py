@@ -20,6 +20,7 @@ def exifExtractAll(img_path):
             return 0
 
     print(metadata)
+    
     return metadata
 
 

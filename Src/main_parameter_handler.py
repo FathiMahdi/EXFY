@@ -82,7 +82,7 @@ def parseMainParameter(parameter,arg_counter):
      
             # others just extract the metadata ond show them in terminal
             elif (arg_counter==4) and ((parameter[2] != '--source') or (parameter[2] != '-s')):
-                print(parameter[2],parameter[3])
+              
                 yaraRunRuleFromFile(parameter[2],parameter[3])    
 
         # chek if all is required
@@ -92,7 +92,7 @@ def parseMainParameter(parameter,arg_counter):
             if (arg_counter>=4) :
 
                 if arg_counter==5:
-                    print(parameter[2],parameter[3],parameter[4])
+                  
                     ExportALLToCsv(parameter[2],parameter[3],parameter[4])
                     
                 elif arg_counter==4:
