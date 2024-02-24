@@ -1,6 +1,8 @@
 import sys
 from main_parameter_handler import *
 
+# show program banner
+banner('EXFY TOOL')
 
 # initialize system parameter list
 system_parameters = []
@@ -19,4 +21,8 @@ if detect:
 
 # else
 else:
-    print('Error flag {} not found'.format(system_parameters[flag_error_index]))
+    if len(system_parameters)==1:
+        print('add -h or --help to to see all commands')
+
+    elif len(system_parameters)>=2:
+        print('Error flag {} not found'.format(system_parameters[flag_error_index]))

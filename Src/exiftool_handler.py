@@ -1,6 +1,10 @@
 import exiftool
 import pandas as pd
+from pyfiglet import Figlet
 
+def banner(txt):
+    f = Figlet(font='slant')
+    print(f.renderText(txt))
 
 def exifExtractAll(img_path):
 

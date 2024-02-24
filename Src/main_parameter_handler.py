@@ -1,6 +1,7 @@
 import sys
 from exiftool_handler import *
 from yara_handler import *
+from all_handler import *
 
 # -h --help help and banner
 # -a -all exiftool + yara + all csv
@@ -22,7 +23,9 @@ avaiable_flags=[
     '--csv',
     '-c',
     '--source',
-    '-s'
+    '-s',
+    '--all',
+    '-a'
 ]
 
 
@@ -87,18 +90,18 @@ def parseMainParameter(parameter,arg_counter):
          
                 yaraRunRuleFromFile(parameter[2],parameter[3])    
 
-
         # chek if all is required
-        # elif parameter[1] == '--all' or parameter[1]== '-a':
+        elif parameter[1] == '--all' or parameter[1]== '-a':
 
-        #     # check if csv extraction required
-        #     if (arg_counter>=4) and ((parameter[3] == '--csv') or (parameter[3] == '-c')):
+            # check if csv extraction required
+            if (arg_counter>=4) :
 
-        #         exifConvertToCsv(parameter[2],parameter[4])
+                if arg_counter==5:
+                    ExportALLToCsv(parameter[2],parameter[3],parameter[4])
+                    
+                elif arg_counter==4:
+                    ExportALLToCsv(parameter[2],parameter[3])
 
-        #     # others just extract the metadata ond show them in terminal
-        #     elif (arg_counter>=3):
-        #         exifExtraclAll(parameter[2])
 
         # no command found
         else:
