@@ -25,6 +25,29 @@ avaiable_flags=[
     '-s'
 ]
 
+
+def FlagChecker(system_parameters):
+
+    detect = False
+    flag_error_index = 0
+
+    for i in range(len(system_parameters)):
+
+        if system_parameters[i][0] == '-':
+
+            detect = False
+            for j in range(len(avaiable_flags)):
+
+                if system_parameters[i]==avaiable_flags[j]:
+                    detect = True
+
+            if detect== False:
+                flag_error_index = i
+                break   
+
+    return detect , flag_error_index
+
+
 def parseMainParameter(parameter,arg_counter):
 
     if arg_counter > 1:
@@ -60,8 +83,8 @@ def parseMainParameter(parameter,arg_counter):
                 yaraRunRule(parameter[3],parameter[4])
      
             # others just extract the metadata ond show them in terminal
-            elif (arg_counter==3) and ((parameter[2] != '--source') or (parameter[2] != '-s')):
-                print('detected')
+            elif (arg_counter==4) and ((parameter[2] != '--source') or (parameter[2] != '-s')):
+         
                 yaraRunRuleFromFile(parameter[2],parameter[3])    
 
 
