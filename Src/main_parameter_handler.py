@@ -10,6 +10,7 @@ from yara_handler import *
 
 
 # PEY -e 3439yeqhr.png --csv kabgfkjbaf.csv
+# PEY -y  rule  path 
 
 def parseMainParameter(parameter,arg_counter):
 
@@ -30,20 +31,25 @@ def parseMainParameter(parameter,arg_counter):
                 exifConvertToCsv(parameter[2],parameter[4])
 
             # others just extract the metadata ond show them in terminal
-            elif (arg_counter>=3):
+            elif (arg_counter<=3):
                 exifExtractAll(parameter[2])
 
         # chek if yara is required
         elif parameter[1] == '--yara' or parameter[1]== '-y': 
-
+            
             # check if csv extraction required
-            if (arg_counter>=4) and ((parameter[3] == '--csv') or (parameter[3] == '-c')):
+            # if (arg_counter>=4) and ((parameter[3] == '--csv') or (parameter[3] == '-c')):
 
-                yaraConvertToCsv(parameter[2],parameter[4])
+            #    yaraConvertToCsv(parameter[2],parameter[4])
 
+            # PEY -y  -s rule  path 
+            if (arg_counter==5) and ((parameter[2] == '--source') or (parameter[2] == '-s')):
+                yaraRunRule(parameter[3],parameter[4])
+     
             # others just extract the metadata ond show them in terminal
-            elif (arg_counter>=3):
-                yaraRunRule(parameter[2])    
+            elif (arg_counter==3) and ((parameter[2] != '--source') or (parameter[2] != '-s')):
+                print('detected')
+                yaraRunRuleFromFile(parameter[2],parameter[3])    
 
 
         # chek if all is required

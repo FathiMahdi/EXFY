@@ -1,1 +1,7 @@
+assets/*
+__pycache__/*
 *.pyc
+*.csv
+*.png
+*.jpg
+*.jpeg

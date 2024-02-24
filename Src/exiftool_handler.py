@@ -20,7 +20,7 @@ def exifExtractAll(img_path):
 
 
 def exifConvertToCsv(img_path,csv_path='metadata.csv'):
-    metadata  = exifExtraclAll(img_path)
+    metadata  = exifExtractAll(img_path)
     data_frame = pd.DataFrame.from_dict(metadata)
     data_frame.to_csv(csv_path)
 
