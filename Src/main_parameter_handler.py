@@ -12,6 +12,19 @@ from yara_handler import *
 # PEY -e 3439yeqhr.png --csv kabgfkjbaf.csv
 # PEY -y  rule  path 
 
+avaiable_flags=[
+    '-e',
+    '--exiftool',
+    '-y',
+    '--yara',
+    '-h',
+    '--help',
+    '--csv',
+    '-c',
+    '--source',
+    '-s'
+]
+
 def parseMainParameter(parameter,arg_counter):
 
     if arg_counter > 1:
