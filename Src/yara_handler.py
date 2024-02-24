@@ -34,7 +34,6 @@ def yaraRunRuleFromFile(rule_path,file):
     #dic = {} # file_name: match
     dic = []
     try:
-
         rules = yara.compile(filepath=rule_path)
 
         try: 
