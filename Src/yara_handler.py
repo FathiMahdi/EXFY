@@ -1,7 +1,7 @@
 import yara
 import os
 
-
+# def yara_scanner:
 def list_files_in_directory(directory_path):
     isDerectory = False
     file_names = []

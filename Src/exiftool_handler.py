@@ -6,6 +6,7 @@ def banner(txt):
     f = Figlet(font='slant')
     print(f.renderText(txt))
 
+
 def exifExtractAll(img_path):
 
     metadata={}
@@ -19,7 +20,16 @@ def exifExtractAll(img_path):
             print("Error file not found!!")
             return 0
 
-    print(metadata)
+    it = 1
+    for item in metadata:
+        print()
+        print('------------------------------------------------------------')
+        print('Metadata of file:   ',it)
+        print('------------------------------------------------------------')
+        print()
+        it +=1
+        for subitem in item:
+            print(subitem,":    ",item[subitem])
     
     return metadata
 
