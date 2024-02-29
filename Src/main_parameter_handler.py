@@ -2,6 +2,9 @@ import sys
 from exiftool_handler import *
 from yara_handler import *
 from all_handler import *
+import yara_updater
+import yara_scanner
+
 
 # -h --help help and banner
 # -a -all exiftool + yara + all csv
@@ -23,6 +26,8 @@ avaiable_flags=[
     '--csv',
     '-c',
     '--source',
+    '--update',
+    '-u',
     '-s',
     '--all',
     '-a'
