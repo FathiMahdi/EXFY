@@ -131,6 +131,22 @@ def extract_zip(zip_file_path, directory_to_extract_to):
         zf.extractall(directory_to_extract_to)
 
 
+
+def compile_yara_rules_ind(yara_rule_path_list):
+
+    for filename in os.scandir(yara_rule_path_list):
+
+        if filename.is_file():
+
+            try:
+                print(filename.path)
+                compiled = yara.compile(filepath=filename.path)
+     
+            except Exception as e:
+                if settings.verbose_enabled:
+                    print("[-] Could not compile the file {}. {}".format(filename, e))
+
+
 def compile_yara_rules(yara_rule_path_list, save_directory):
     for path in yara_rule_path_list:
 
@@ -142,6 +158,16 @@ def compile_yara_rules(yara_rule_path_list, save_directory):
             if settings.verbose_enabled:
                 print("[-] Could not compile the file {}. {}".format(path, e))
 
+
+def compile_yara_rules_src_dir_ind(path):
+
+    
+    # path_list = get_file_set_in_dir(path, True, "*.yar")
+
+    # if get_file_set_in_dir is None or len(path_list) < 1:
+    #     return
+
+    compile_yara_rules_ind(path)
 
 def compile_yara_rules_src_dir():
 

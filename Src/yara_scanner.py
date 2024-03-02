@@ -70,7 +70,7 @@ def match(path_list, yara_rules_path_list):
                     matches = rules.match(file_path, timeout=settings.yara_matching_timeout)
 
                 if len(matches) > 0:
-                    record = {"file": file_path, "yara_rules_file": rule_path, "match_list": matches}
+                    
                     match_list.append(record)
 
                     logger.log_info('Found {} matches in "{}" {} "{}"'.format(len(matches), file_path, matches, rule_path), module_name)
@@ -93,6 +93,38 @@ def match(path_list, yara_rules_path_list):
                 logger.log_error(e, module_name)
 
     return match_list
+
+
+
+def scan_file_ind(rules_path,file_path):
+
+    file_path = u"{}".format(file_path)
+
+    if file_path is None or not os.path.isfile(file_path):
+        msg = "The provided path '{}' is invalid.".format(file_path)
+        logger.log_error(msg, module_name)
+        print('[-] ERROR: {}'.format(msg))
+        raise Exception(msg)
+
+    # Check if there are any rules in yara-rules-src dir and compile them
+    common_functions.compile_yara_rules_src_dir_ind(rules_path)
+    try:
+        logger.log_info('Single file scan started', module_name)
+        print('[+] Single file scan started')
+
+        logger.log_debug('Getting Yara-Rules', module_name)
+        common_functions.print_verbose('[+] Getting Yara-Rules..')
+        yara_rule_path_list = get_file_path_list(settings.yara_rules_directory, True, '*.yar')
+
+        match_list = match([file_path], yara_rule_path_list)
+        print('[+] File scan complete.')
+        logger.log_info('File scan complete', module_name)
+        return match_list
+
+    except Exception as e:
+        common_functions.print_verbose('[-] ERROR: {}'.format(e))
+        logger.log_error(e, module_name)
+        raise
 
 
 def scan_file(file_path):
@@ -124,6 +156,47 @@ def scan_file(file_path):
         logger.log_error(e, module_name)
         raise
 
+
+def scan_directory_ind(rule_path,directory_path, recursive = False):
+
+    directory_path = u"{}".format(directory_path)
+
+    if directory_path is None or not os.path.isdir(directory_path):
+        msg = "The provided path '{}' is invalid.".format(directory_path)
+        logger.log_error(msg, module_name)
+        print('[-] ERROR: {}'.format(msg))
+        raise Exception(msg)
+
+    # Check if there are any rules in yara-rules-src dir and compile them
+    common_functions.compile_yara_rules_src_dir_ind(rule_path)
+
+    try:
+        logger.log_info('Directory scan started', module_name)
+        print('[+] Directory scan started')
+
+
+        logger.log_debug('Getting files path(s) for scan', module_name)
+        common_functions.print_verbose('[+] Getting files path(s) for scan..')
+        file_path_list = get_file_path_list(directory_path, recursive, '*')
+
+        logger.log_debug('[+] {} File to process'.format(len(file_path_list)), module_name)
+        print('[+] {} File to process.'.format(len(file_path_list)))
+
+        logger.log_debug('Getting Yara-Rules', module_name)
+        common_functions.print_verbose('[+] Getting Yara-Rules..')
+        yara_rule_path_list = get_file_path_list(settings.yara_rules_directory, True, '*.yar')
+
+        match_list = match(file_path_list, yara_rule_path_list)
+
+        print('[+] Directory scan complete.')
+        logger.log_info('Directory scan complete', module_name)
+
+        return match_list
+
+    except Exception as e:
+        common_functions.print_verbose('[-] ERROR: {}'.format(e))
+        logger.log_error(e, module_name)
+        raise
 
 def scan_directory(directory_path, recursive = False):
 

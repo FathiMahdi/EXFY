@@ -1,5 +1,6 @@
 import yara
 import os
+from pathlib import Path
 
 # def yara_scanner:
 def list_files_in_directory(directory_path):
@@ -30,56 +31,60 @@ def list_files_in_directory(directory_path):
 
 
 # run yara from file
-def yaraRunRuleFromFile(rule_path,file):
-    #dic = {} # file_name: match
+def yaraRunRuleFromDir(rule_path,dir):
     dic = []
     try:
+     
         rules = yara.compile(filepath=rule_path)
 
         try: 
 
-            isdir, name_list = list_files_in_directory(file)
+            isdir, name_list = list_files_in_directory(dir)
 
             if isdir:
                 for name in name_list:
                     
-                    matches = rules.match(file+name)
-
-                    #dic[name] =matches
-                    dic.append(matches)
-
+                    matches = rules.match(dir+name)
                     if len(matches)!=0:
-                        print(matches)
+                        print('{}, rule match: {} '.format(name,matches))
+                        record = {"file": dir+name, "yara_rules_file": rule_path, "match_list": matches}
+                        dic.append(record)
 
-                    else:
-                        print('File does not match any rule')
 
-        except:
-            print('Yaya: file not found')
+
+        except Exception as e:
+            print(e)
 
             
-    except:
-        print('Yara: rule not found')
+    except Exception as e:
+        print(e)
+
 
     return dic
 
     
 
 # run yara from direct rule
-def yaraRunRule(rule,file):
-    dic = {}
+def yaraRunRuleFromFile(rule,file):
+    
+    dic = []
     try:
-        rules = yara.compile(source=rule)
+        rules = yara.compile(filepath=rule)
         
         try:
             matches = rules.match(file)
             if len(matches)!=0:
-                print(matches)
-            else:
-                print('File does not match any rule')
-        except:
-            print('Yaya: file not found')
-    except:
-        print('Yara: rule not found')
+                print('{}, rule match: {} '.format(file,matches))
+                record = {"file": file, "yara_rules_file": rule, "match_list": matches}
+                dic.append(record)
+
+        except Exception as e:
+            print(e)
+            
+    except Exception as e:
+        print(e)
+
+
+    return dic
 
 

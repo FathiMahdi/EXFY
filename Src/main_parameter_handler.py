@@ -38,18 +38,18 @@ def parserHandler(args):
         
         # run yara with custom rule
         if(args.custom):
-
+            
             try:
                 if(args.file):
+                    match_result = yaraRunRuleFromFile(args.custom,args.file)
+             
                     
-                    yaraRunRule(args.custom,args.file)
+                if(args.dir):
+                    match_result = yaraRunRuleFromDir(args.custom,args.dir)
+          
                     
-
-                elif(args.dir):
-
-                    yaraRunRuleFromFile(args.custom,args.dir)
-            except:
-                print('Erorr running yara on custom rules')
+            except Exception as e:
+                print(e)
 
         
         # run yara with repository rules
@@ -72,9 +72,7 @@ def parserHandler(args):
             report = report_generator.generate_report(match_result)
             common_functions.write_to_file(args.report, report)
             print('[+] Report saved to "{}"'.format(args.report))
-
-
-
+        
 
 
     # parse all
