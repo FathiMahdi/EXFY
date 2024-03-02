@@ -34,12 +34,17 @@ The following table shows all the node AT commads where ***x*** is variable :
 
 | **Flag**               | **Description**                                   |
 | :----------------------| :-------------------------------------------------|
-|  `-e` , `--exiftool`   |  use exiftool only                                |
-|  `-y` , `--yara`       |  use yara only                                    |
-|  `-a` , `--all`        |  exiftool and yara                                |
-|  `-c` , `--csv`        |  export csv file                                  |
-|  `-s` , `--source`     |  add rule source                                  |
 |  `-h` , `--help`       |  help                                             |
+|  `-y` , `--yara`       |  use yara only                                    |
+|  `--custom`            |  run yara on cunstom rules                        |
+|  `--dir`               |  folder to be checked by yara                     |
+|  `--file`              |  file to be checked by yara                       |
+|  `--repo`              |  run yara on repository rules                     |
+|  `--update`,`u`        |  update yara-scanner repository rules             |
+|  `--exiftool`,'-e'     |  use exiftool only                                |
+|  `-c` , `--csv`        |  export csv file                                  |
+|  `-r` , `--report`     |  generate report                                  |
+|  `-a` , `--all`        |  run both yara and exiftool                       |
 *Table: Progam flags*
 
 You can run exfy -h to see all the avialble command
@@ -86,26 +91,32 @@ To run exiftool on dir or file
   
 To run exiftool on dir or file and export .csv report
 
+> Attention **exiftool report only support CSV**
+
 - `python3 exfy.py --exiftool  Images/ --csv report.csv` {dir/file}
 
 To run yara{custom rules}
 
 - `python3 exfy.py --yara  --custom yarafile --file Images/file.jpg` {file}
-- `python3 exfy.py --yara  --custom yarafile --file Images/` {dir}
+- `python3 exfy.py --yara  --custom yarafile --dir Images/` {dir}
 
-To run both yara{yara scanner repository rules} .html report
+To run yara{yara scanner repository rules} .html report
+
+> Attention **yara-scanner report only support html**
 
 - `python3 exfy.py --yara --repo --dir Images/ --report report.html` {dir}
 - `python3 exfy.py --yara --repo --dir Images/ --report report.html` {file}
-  
+
 To run both yara{yara scanner repository rules} and exify and export .csv and .html report
+
+> Attention **For all flag the report file doesn't has extention. It will auto generate report with both .csv and .html**
 
 - `python3 exfy.py --all --repo --dir Images/ --report report` {directory}
 - `python3 exfy.py --all --repo --file Images/test.jpg --report report` {file}
 
 To run both yara{custom rules} and exify and export .csv and .html report
 
-- `python3 exfy.py --all --custom custom_rules/r1.yar --dir Images/ --report report`
+- `python3 exfy.py --all --custom custom_rules/r1.yar --dir Images/ --report report` 
   
 ## Reference
 
