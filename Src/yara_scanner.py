@@ -70,7 +70,7 @@ def match(path_list, yara_rules_path_list):
                     matches = rules.match(file_path, timeout=settings.yara_matching_timeout)
 
                 if len(matches) > 0:
-                    
+                    record = {"file": file_path, "yara_rules_file": rule_path, "match_list": matches}
                     match_list.append(record)
 
                     logger.log_info('Found {} matches in "{}" {} "{}"'.format(len(matches), file_path, matches, rule_path), module_name)
@@ -82,6 +82,11 @@ def match(path_list, yara_rules_path_list):
                     logger.log_incident(file_path, matches, rule_path)
                     common_functions.report_incident_by_email(file_path, matches, rule_path, common_functions.get_datetime())
 
+                else:
+                    record = {"file": file_path, "yara_rules_file": rule_path, "match_list": []}
+                    match_list.append(record)
+
+                    
             except yara.Error as e:
                 common_functions.print_verbose('[-] ERROR: {}'.format(e))
                 logger.log_error(e, module_name)

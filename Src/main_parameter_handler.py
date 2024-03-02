@@ -93,7 +93,10 @@ def parserHandler(args):
                     metadata = exifExtractAll(args.dir)
                     match_result = yara_scanner.scan_directory(args.dir, 1)
 
-
+                if(args.report):
+                    ExportALLToCsv(metadata,match_result,args.report+'.csv')
+                    ExportALLToHTML(metadata,match_result,args.report+'.html')
+                    
             except Exception as e:
                 print(e)
 
@@ -117,9 +120,9 @@ def parserHandler(args):
 
                         # generate reports
                         
-                        if(args.report):
-                            ExportALLToCsv(metadata,match_result,args.report+'.csv')
-                            ExportALLToHTML(metadata,match_result,args.report+'.html')
+                if(args.report):
+                        ExportALLToCsv(metadata,match_result,args.report+'.csv')
+                        ExportALLToHTML(metadata,match_result,args.report+'.html')
 
 
 
