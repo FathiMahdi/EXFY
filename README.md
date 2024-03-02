@@ -16,6 +16,7 @@ The EXFY is a simple command line tool that mix beteween exiftool and yara, This
   - [Flags](#flags)
   - [Examples](#examples)
   - [Reference](#reference)
+  - [license](#license)
   
 
 
@@ -124,3 +125,7 @@ To run both yara{custom rules} and exify and export .csv and .html report
 - <https://github.com/VirusTotal/yara>
 - <https://github.com/smarnach/pyexiftool>
 - <https://github.com/iomoath/yara-scanner>
+
+## license
+
+Thsi work is under [GNU GENERAL PUBLIC LICENSE](LICENSE)
