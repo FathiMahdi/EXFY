@@ -4,6 +4,7 @@ __pycache__/*
 *.csv
 *.png
 *.jpg
+*.log
 *.jpeg
 *.html
 *.yar
