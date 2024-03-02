@@ -2,9 +2,30 @@ import exiftool
 import pandas as pd
 from pyfiglet import Figlet
 
+
+
+
 def banner(txt):
     f = Figlet(font='slant')
     print(f.renderText(txt))
+
+
+
+def exiftoolAll(img_path):
+
+    metadata={}
+
+    with exiftool.ExifToolHelper() as et:
+
+        try:
+            metadata = et.get_metadata(img_path) 
+
+        except:
+            print("Error file not found!!")
+            return 0
+
+    
+    return metadata
 
 
 def exifExtractAll(img_path):
@@ -32,6 +53,7 @@ def exifExtractAll(img_path):
             print(subitem,":    ",item[subitem])
     
     return metadata
+
 
 
 def exifConvertToCsv(img_path,csv_path='metadata.csv'):

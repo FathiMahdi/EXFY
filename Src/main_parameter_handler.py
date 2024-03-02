@@ -9,12 +9,14 @@ import common_functions
 
 
 
+
 def parserHandler(args):
 
     # parser yara rules update
     if(args.update):
         print("- Updating yara rules ...")
         yara_updater.update()
+        return
        
     # parse exif tool
     if(args.exiftool):
@@ -73,8 +75,53 @@ def parserHandler(args):
             common_functions.write_to_file(args.report, report)
             print('[+] Report saved to "{}"'.format(args.report))
         
-
-
     # parse all
-           
- #   exfy --yara --file/dir file/dir --custom dd --repo --report
+    if(args.all):
+
+        # yara and exif tool with yara scanner 
+        if(args.repo):
+
+            try:
+
+                if(args.file):
+
+                    metadata = exifExtractAll(args.file)
+                    match_result = yara_scanner.scan_file(args.file)
+
+                elif(args.dir):
+
+                    metadata = exifExtractAll(args.dir)
+                    match_result = yara_scanner.scan_directory(args.dir, 1)
+
+
+            except Exception as e:
+                print(e)
+
+
+        elif(args.custom):
+
+            try:
+
+                if(args.file):
+                        
+                    metadata = exifExtractAll(args.file)
+
+                    match_result = yaraRunRuleFromFileAll(args.custom,args.file)
+
+            
+                if(args.dir):
+                        
+                        metadata = exifExtractAll(args.dir)
+                        
+                        match_result = yaraRunRuleFromDirAll(args.custom,args.dir)
+
+                        # generate reports
+                        
+                        if(args.report):
+                            ExportALLToCsv(metadata,match_result,args.report+'.csv')
+                            ExportALLToHTML(metadata,match_result,args.report+'.html')
+
+
+
+            except Exception as e:
+                print(e)

@@ -18,7 +18,7 @@ def main():
     parser.add_argument('--exiftool','-e',help='exif tool',metavar='file path or dir path',type=str)
     parser.add_argument('--csv','-c',type=str,help='export as csv',metavar='csv file name and path',required=False,default='exiftool_report.csv')
     parser.add_argument('--report','-r',type=str,help='export yara html report',metavar='report name file name and path')
-    parser.add_argument('--all','-a',type=str,help='Yara and exiftool',metavar='')
+    parser.add_argument('--all','-a',help='Yara and exiftool',action='store_true')
 
 
     # construct argparser object
