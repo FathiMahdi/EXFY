@@ -21,6 +21,7 @@ The EXFY is a simple command line tool that mix beteween exiftool and yara, This
 
 ## Features
 
+- Can Combine both exiftool metadata and yara match result in one report  
 - Suport yara scanner file/dir based on repository rules for more info <a href=https://github.com/iomoath/yara-scanner>Yara scanner by Moath Maharmeh </a>.
 - Suport csv and html report extraction.
 
@@ -40,8 +41,8 @@ The following table shows all the node AT commads where ***x*** is variable :
 |  `--dir`               |  folder to be checked by yara                     |
 |  `--file`              |  file to be checked by yara                       |
 |  `--repo`              |  run yara on repository rules                     |
-|  `--update`,`u`        |  update yara-scanner repository rules             |
-|  `--exiftool`,'-e'     |  use exiftool only                                |
+|  `u`,`--update`        |  update yara-scanner repository rules             |
+|  `-e`,`--exiftool`     |  use exiftool only                                |
 |  `-c` , `--csv`        |  export csv file                                  |
 |  `-r` , `--report`     |  generate report                                  |
 |  `-a` , `--all`        |  run both yara and exiftool                       |
