@@ -61,27 +61,29 @@ python3 exfy.py -h
                                                     
 
 usage: EXFY [-h] [--yara] [--custom yara rules file] [--dir dir apth] [--file file path]
-            [--repo] [--update] [--exiftool file path or dir path]
+            [--repo] [--update] [--exiftool full file/folder path]
             [--csv csv file name and path] [--report report name file name and path] [--all]
 
 A tool that compine yara and exiftool
 
 options:
   -h, --help            show this help message and exit
-  --yara, -y            check rules
+  --yara, -y            use only yara
   --custom yara rules file
-                        run costum rules
+                        run yara on costum rules
   --dir dir apth        directory path
   --file file path      file path
   --repo                yara scan with repository rules
   --update, -u          update yara rules
-  --exiftool file path or dir path, -e file path or dir path
-                        exif tool
+  --exiftool full file/folder path, -e full file/folder path
+                        use exiftool only
   --csv csv file name and path, -c csv file name and path
                         export as csv
   --report report name file name and path, -r report name file name and path
                         export yara html report
   --all, -a             Yara and exiftool
+
+-h or --help to see all commands
 
 ```
 
