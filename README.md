@@ -132,4 +132,4 @@ To run both yara{custom rules} and exify and export .csv and .html report
 
 ## license
 
-Thsi work is under [GNU GENERAL PUBLIC LICENSE](LICENSE)
+This work is under [GNU GENERAL PUBLIC LICENSE](LICENSE)
