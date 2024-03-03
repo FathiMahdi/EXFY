@@ -6,7 +6,7 @@ A tool that combine yara and exiftool
 
 ## Discription
 
-The <a href=https://github.com/FathiMahdi/EXFY>EXFY</a>is a simple command line tool that mix beteween exiftool and yara, This tool used as a file/s malware detector as well to extract all the file/s meta data
+The <a href=https://github.com/FathiMahdi/EXFY>EXFY</a> is a simple command line tool that mix beteween exiftool and yara, This tool used as a file/s malware detector as well to extract all the file/s meta data
 
 ## Content
 
