@@ -2,4 +2,5 @@ numpy
 pandas
 pyfiglet
 PyExifTool
+python-yara
 yara
