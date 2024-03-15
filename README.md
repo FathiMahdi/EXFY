@@ -33,7 +33,7 @@ The <a href=https://github.com/FathiMahdi/EXFY>EXFY</a> is a simple command line
   
 ## Flags
 
-The following table shows all the command line flags and thier description :
+The following table shows all the command line flags and their description :
 
 | **Flag**               | **Description**                                   |
 | :----------------------| :-------------------------------------------------|
